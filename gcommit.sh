@@ -6,8 +6,14 @@ if [ $# -eq 0 ]; then
     echo "Please provide commit message. Eg. gcommit \"testing stuff\""
     exit 1
 fi
-if git add .; then
-    if git commit -m "$COMMIT_MSG"; then
-        git push remote $BRANCH_NAME
-    fi
+git add .
+git commit -m "$COMMIT_MSG"
+
+git push
+RETURN_CODE=$?
+
+if ! test "$RETURN_CODE" -eq 0
+then
+    git push --set-upstream origin "$BRANCH_NAME"
 fi
+
