@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-BRANCH_NAME=$(git symbolic-ref --short head)
+BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
 COMMIT_MSG="$1"
 
 if [ $# -eq 0 ]; then
